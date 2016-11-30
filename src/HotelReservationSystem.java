@@ -6,13 +6,9 @@ import javax.swing.*;
 public class HotelReservationSystem {
 	
 	public static void main(String[] args) {
-		ArrayList<JComponent> a = new ArrayList<>();
-		HotelComponents hotel = new HotelComponents(a);
-		a.add(new WelcomePanel(hotel));
-		
+		HotelModel hotel = new HotelModel(null);
+		hotel.update(new WelcomePanel(hotel));
 		HotelFrame frame = new HotelFrame(hotel);
 		hotel.attach(frame);
 	}
-	
-	
 }
