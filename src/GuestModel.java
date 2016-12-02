@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -6,7 +7,7 @@ import javax.swing.JOptionPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-public class GuestModel {
+public class GuestModel implements Serializable{
 	private HashMap<Guest, ArrayList<Room>> hotel;
 	private ArrayList<Room> availableRooms;
 	private ArrayList<ChangeListener> listeners;
@@ -268,6 +269,9 @@ public class GuestModel {
 			c.stateChanged(event);
 		}
 	}
+	
+	//////******* new codes from Duoc. Will organize later. 
+	
 
 
 }

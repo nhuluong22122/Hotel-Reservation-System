@@ -1,5 +1,12 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
@@ -10,6 +17,9 @@ import javax.swing.JPanel;
 
 public class WelcomePanel extends JPanel{
 
+	private GuestModel guestModel; 
+	private final String FILE_NAME = "guestmodel.txt";
+	
 	public WelcomePanel(HotelModel hotel) {
 		setLayout(null);
 
@@ -28,9 +38,9 @@ public class WelcomePanel extends JPanel{
 				ActionListener() {
 
 					public void actionPerformed(ActionEvent e) {
-						GuestModel gm = new GuestModel();
+						guestModel = deserialize();
 						
-						hotel.update(new UserPanel(hotel, gm));
+						hotel.update(new UserPanel(hotel, guestModel));
 						
 					}
 				
@@ -39,4 +49,38 @@ public class WelcomePanel extends JPanel{
 		add(managerButton);
 		add(guestButton);
 	}
+	
+	
+
+	/**
+	 * Gets all reservations from guestmodel.txt file.
+	 * @return	Events Calendar.
+	 */
+	public GuestModel deserialize(){
+		GuestModel result = null;
+
+		try {
+			File file = new File(FILE_NAME);
+			
+			if(!file.exists()){
+				return new GuestModel();	//returns a new GuestModel for the very first run
+			}
+			
+			FileInputStream fileIn = new FileInputStream(FILE_NAME);
+			ObjectInputStream in = new ObjectInputStream(fileIn);
+			result = (GuestModel) in.readObject();
+			in.close();
+			fileIn.close();
+			
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+
 }
