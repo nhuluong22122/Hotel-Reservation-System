@@ -7,6 +7,7 @@ import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -22,6 +23,10 @@ public class UserPreferencePanel extends JPanel{
 		setLayout(null);
 
 		// Components in userPreferencePanel
+		JLabel formatWarning = new JLabel("Enter date in MM/DD/YY format:");
+		formatWarning.setFont(new Font("Sans-serif", Font.PLAIN, 14));
+		formatWarning.setBounds(200, 50, 300, 50);
+		add(formatWarning);
 		JLabel checkInLabel = new JLabel("Check in");
 		checkInLabel.setBounds(200, 100, 100, 20);
 		final JTextField checkInField = new JTextField();
@@ -59,10 +64,10 @@ public class UserPreferencePanel extends JPanel{
 				
 				}
 				catch(NullPointerException n) {
-					System.out.println("Please log in");
+					JOptionPane.showMessageDialog(null, "Please log in");
 				}
 				catch(IllegalArgumentException e) {
-					System.out.println("Please enter a valid check-in and check-out date");
+					JOptionPane.showMessageDialog(null, "Please enter a valid check-in and check-out date");
 				}
 			}
 		});
@@ -81,10 +86,10 @@ public class UserPreferencePanel extends JPanel{
 					
 				}
 				catch(NullPointerException n) {
-					System.out.println("Please log in");
+					JOptionPane.showMessageDialog(null, "Please log in");
 				}
 				catch(IllegalArgumentException e) {
-					System.out.println("Please enter a valid check-in and check-out date");
+					JOptionPane.showMessageDialog(null, "Please enter a valid check-in and check-out date");
 				}
 			}
 		});

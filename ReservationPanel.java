@@ -15,7 +15,7 @@ import javax.swing.event.ChangeListener;
  * Responsible for creating the look and feel of the room availability view
  *
  */
-public class ReservationPanel extends JPanel implements Serializable{
+public class ReservationPanel extends JPanel{
 	private Date startDate;
 	private Date endDate;
 	private JLabel availabilityLabel;
@@ -35,13 +35,6 @@ public class ReservationPanel extends JPanel implements Serializable{
 		hm.attach(listener);
 		guestModel.addChangeListener(listener);
 
-
-		/* http://stackoverflow.com/questions/2592207/how-to-improve-look-and-feel-of-java-swing-gui */
-		try { 
-			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 		setLayout(null);
 		availabilityLabel = new JLabel();
 		availabilityLabel.setBounds(10, 10, 300, 50);
@@ -52,7 +45,6 @@ public class ReservationPanel extends JPanel implements Serializable{
 		pane.setBounds(25, 50, 200, 300);
 
 		add(pane);
-		//		add(availabilityDisplay);
 
 		JLabel requestLabel = new JLabel("Enter room number to reserve:");
 		requestLabel.setBounds(300, 70, 300, 50);
@@ -83,17 +75,17 @@ public class ReservationPanel extends JPanel implements Serializable{
 			public void actionPerformed(ActionEvent e) {
 				int roomNumber = Integer.parseInt(roomTextField.getText());
 				if (roomNumber <= 10 && roomType.equals("Luxury")) {
-					System.out.println("Please select one of the available rooms shown.");
+					JOptionPane.showMessageDialog(null, "Please select one of the available rooms shown.");
 				}
 				else if (roomNumber > 10 && roomType.equals("Economy")) {
-					System.out.println("Please select one of the available rooms shown.");
+					JOptionPane.showMessageDialog(null, "Please select one of the available rooms shown.");
 				}
 				else {
 					try {
 						gm.addRoom(roomNumber);
 					}
 					catch(IndexOutOfBoundsException oob) {
-						System.out.println("Please select one of the available rooms shown.");
+						JOptionPane.showMessageDialog(null, "Please select one of the available rooms shown.");
 					}
 				}
 			}
@@ -126,10 +118,7 @@ public class ReservationPanel extends JPanel implements Serializable{
 		if (startDate != null  & endDate != null) {
 			title = "Available Rooms " + formatDate(startDate) + " - " + formatDate(endDate);
 		}
-
-		System.out.println(guestModel.getRooms(type));
 		availabilityDisplay.setText(guestModel.getRooms(type));
-
 
 		availabilityLabel.setText(title);
 		add(availabilityLabel);

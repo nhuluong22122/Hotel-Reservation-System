@@ -3,7 +3,6 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Guest implements Comparable<Guest>, Serializable{
-	//	private ArrayList<Room> reservedRooms;
 	private int userID;
 	private String username;
 	private Date startDate;
@@ -13,10 +12,6 @@ public class Guest implements Comparable<Guest>, Serializable{
 		userID = ID;
 		username = user;
 	}
-
-	//	public ArrayList<Room> getReservedRooms() {
-	//		return reservedRooms;
-	//	}
 
 	public int getUserID() {
 		return userID;
@@ -46,14 +41,6 @@ public class Guest implements Comparable<Guest>, Serializable{
 		endDate = eDate;
 	}
 
-	//	public void addReservedRoom(Room room) {
-	//		reservedRooms.add(room);
-	//	}
-	//	
-	//	public void removeReservedRoom(Room room) {
-	//		reservedRooms.remove(room);
-	//	}
-
 	public void setUsername(String user) {
 		username = user;
 	}
@@ -61,4 +48,5 @@ public class Guest implements Comparable<Guest>, Serializable{
 	public int compareTo(Guest g) {
 		return username.compareTo(g.getUsername());
 	}
+	
 }

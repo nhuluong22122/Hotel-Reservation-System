@@ -7,6 +7,7 @@ public class Room implements Serializable{
 	private int roomNumber;
 	private Date startDate;
 	private Date endDate;
+	private Guest guest;
 	
 	public boolean getCurrentStatus(){
 		return isCurrent;
@@ -48,19 +49,33 @@ public class Room implements Serializable{
 		endDate = eDate;
 	}
 	
+	public void setGuest(Guest g){
+		guest = g;
+	}
+	
+	public Guest getGuest(){
+		return guest;
+	}
+	
 	public boolean isClash(Date start, Date end) {
 		Room r1 = this;
-		System.out.println("Start " + r1.getStartDate() + " End" + r1.getEndDate()); 
-		System.out.println("Start " + start + " End" + end); 
 		if (r1.getStartDate().equals(start) && r1.getEndDate().equals(end)) {
-			System.out.println("1");
 			return true;
 		}
 		if (r1.getStartDate().compareTo(end) <= 0 && start.compareTo(r1.getEndDate()) <= 0) {
-			System.out.println("2");
 			return true;
 		}
 		return false;
+	}
+	
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null) return false;
+		if (o.getClass() != getClass()) return false;
+		Room r = (Room)o;
+
+		return r.getCurrentStatus() == isCurrent && r.getStartDate().compareTo(startDate) == 0 
+				&& r.getEndDate().compareTo(endDate) == 0 && r.getRoomNumber() == roomNumber && r.getRoomType().compareTo(roomType) == 0;
 	}
 	
 	public String toString() {

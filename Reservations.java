@@ -1,7 +1,11 @@
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.TreeMap;
+
+import javax.swing.JOptionPane;
 
 public class Reservations implements Serializable{
 	private HashMap<Guest, ArrayList<Room>> hotel;
@@ -30,6 +34,26 @@ public class Reservations implements Serializable{
 		}
 	}
 
+	public int getSize() {
+		return hotel.size();
+	}
+	
+//	public void setData(HashMap<Guest, ArrayList<Room>> data) {
+//		hotel = data;
+//	}
+//	
+//	public void setAvailableRooms(ArrayList<Room> list) {
+//		availableRooms = list;
+//	}
+//	
+//	public HashMap<Guest,ArrayList<Room>> getData() {
+//		return hotel;
+//	}
+//	
+//	public ArrayList<Room> getList() {
+//		return availableRooms;
+//	}
+	
 	/**
 	 * Returns a formatted string of current available rooms of a room type
 	 * @param type the room type requested
@@ -38,7 +62,7 @@ public class Reservations implements Serializable{
 	public String getRooms(String type) {
 		String s = "";
 		for (Room r : availableRooms) {
-			if (r.getRoomType().equals(type)) {
+			if (r.getRoomType().equals(type) && r.getRoomNumber() != 0) {
 				s += r.getRoomNumber() + "\n";
 			}
 		}
@@ -72,7 +96,7 @@ public class Reservations implements Serializable{
 		IDCounter++;
 		ArrayList<Room> roomList = new ArrayList<Room>();
 		hotel.put(g, roomList); 
-		System.out.println("Success! Your id is " + g.getUserID());
+		JOptionPane.showMessageDialog(null, "Success! Your id is " + g.getUserID());
 		return g;
 	}
 
@@ -85,7 +109,9 @@ public class Reservations implements Serializable{
 	 */
 	public void cancelReservation(Room r) throws Exception {
 		if (!hotel.get(currentGuest).contains(r)) {
-			throw new Exception(currentGuest.getUsername() + " did not reserve the room " + r.getRoomNumber());
+			String message = currentGuest.getUsername() + " did not reserve the room " + r.getRoomNumber();
+			JOptionPane.showMessageDialog(null, message);
+			throw new Exception(message);
 		}
 		hotel.get(currentGuest).remove(r); 
 	}
@@ -97,11 +123,6 @@ public class Reservations implements Serializable{
 	 * @postcondition: Room is removed from available rooms and added to the map of occupied rooms
 	 */
 	public void addRoom(int roomNumber) {
-		//	if (currentGuest == null) {
-		//		throw new NullPointerException();
-		//	}
-		
-		//	Room r = availableRooms.get(roomNumber-1);
 		Room room = null;
 
 		// Locate room in data structure
@@ -127,11 +148,9 @@ public class Reservations implements Serializable{
 			}
 
 			availableRooms.remove(room);
-			
-			System.out.println(room.toString());
 		}
 		catch (NullPointerException e) {
-			System.out.println("Room " + roomNumber + " is not available");
+			JOptionPane.showMessageDialog(null, "Room " + roomNumber + " is not available");
 		}
 	}
 
@@ -144,10 +163,6 @@ public class Reservations implements Serializable{
 	 * @postcondition: Room is removed from available rooms and added to the map of occupied rooms
 	 */
 	public void addRoom(String checkIn, String checkOut, String roomType) throws IllegalArgumentException, NullPointerException {
-		//		if (currentGuest == null) {
-		//			throw new NullPointerException();
-		//		}
-
 		Room room = null;
 
 		// Locate room in data structure
@@ -184,10 +199,9 @@ public class Reservations implements Serializable{
 				ArrayList<Room> guestRooms = new ArrayList<Room>();
 				hotel.put(currentGuest, guestRooms);
 			}
-		
 		}
 		catch (NullPointerException e) {
-			System.out.println("No available rooms");
+			JOptionPane.showMessageDialog(null, "No rooms are available");
 		}
 	}
 
@@ -201,17 +215,28 @@ public class Reservations implements Serializable{
 	 */
 	public void updateData(Date s, Date e) {
 		// Check if date is valid
-		if (s.compareTo(e) > 0) {
+		Date current = new Date();
+		current.setMinutes(0);
+		current.setHours(0);
+		current.setSeconds(0);
+		s.setMinutes(0);
+		s.setHours(0);
+		s.setSeconds(0);
+	
+		int timeDifference = (int) ((s.getTime()-current.getTime())/(1000*60*60*24));
+		int dayDifference = (int) ((e.getTime()-s.getTime())/(1000*60*60*24));
+		
+		if (s.compareTo(e) > 0 || timeDifference < 0 || dayDifference > 60) {
 			throw new IllegalArgumentException();
 		}
-		
+
 		// Update guest information
 		currentGuest.setStartDate(s);
 		currentGuest.setEndDate(e);
 
+
 		// Update availability information to display for current date
 		ArrayList<Room> newAvailability = new ArrayList<Room>(); 
-		//
 		for (int roomNum = 1; roomNum <= 20; roomNum++) {
 			Room r = new Room();
 			r.setRoomNumber(roomNum);
@@ -226,8 +251,12 @@ public class Reservations implements Serializable{
 		}
 		for (Guest g : hotel.keySet()) {
 			for (Room r : hotel.get(g)) {
+				Room ro = newAvailability.get(r.getRoomNumber()-1);
+				ro.setStartDate(r.getStartDate());
+				ro.setEndDate(r.getEndDate());
+				ro.setCurrentStatus(true);
 				if (r.isClash(s,e)) {
-					newAvailability.remove(r);
+					ro.setRoomNumber(0);
 				}
 			}
 		}
@@ -238,4 +267,8 @@ public class Reservations implements Serializable{
 		return currentGuest;
 	}
 	
+	public HashMap<Guest, ArrayList<Room>> getReservations(){
+		return hotel;
+	}
+
 }
