@@ -15,7 +15,7 @@ import javax.swing.event.ChangeListener;
  * Responsible for creating the look and feel of the room availability view
  *
  */
-public class ReservationPanel extends JPanel{
+public class ReservationPanel extends JPanel implements Serializable{
 	private Date startDate;
 	private Date endDate;
 	private JLabel availabilityLabel;

@@ -11,11 +11,8 @@ import javax.swing.*;
 public class ManagerPanel extends JPanel{
 	
 	private HotelModel hotel;
-	private ReservationsCalendar reservationsCalendar;
-	
 	public ManagerPanel(HotelModel h) {
 		hotel = h;
-		reservationsCalendar = new ReservationsCalendar();
 		setLayout(null);
 		
 		JPanel panel = new JPanel();
@@ -25,19 +22,8 @@ public class ManagerPanel extends JPanel{
 		
 		Dimension s = new Dimension(90,90);
 		
-		JButton loadButton = new JButton("Load");
-		loadButton.setPreferredSize(s);
-		loadButton.addActionListener(new 
-				ActionListener() {
-
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						reservationsCalendar.load();
-					}
-			
-		});
-		
-		
+		JButton saveButton = new JButton("Load");
+		saveButton.setPreferredSize(s);
 		
 		JButton viewButton = new JButton("View");
 		viewButton.setPreferredSize(s);
@@ -46,18 +32,8 @@ public class ManagerPanel extends JPanel{
 		
 		JButton quitButton = new JButton("Quit");
 		quitButton.setPreferredSize(s);
-		quitButton.addActionListener(new 
-				ActionListener(){
-
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						System.exit(0);
-						
-					}
-			
-		});
 		
-		panel.add(loadButton);
+		panel.add(saveButton);
 		panel.add(viewButton);
 		panel.add(quitButton);
 		add(panel);
@@ -76,7 +52,7 @@ public class ManagerPanel extends JPanel{
 						
 						CalendarDataModel model = new CalendarDataModel(data);
 						
-						hotel.update(new ViewPanel(model, reservationsCalendar));
+						hotel.update(new ViewPanel(hotel, model));
 					}
 			
 		};

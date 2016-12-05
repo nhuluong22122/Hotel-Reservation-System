@@ -3,7 +3,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
-import java.util.TreeMap;
 
 import javax.swing.JOptionPane;
 
@@ -267,8 +266,4 @@ public class Reservations implements Serializable{
 		return currentGuest;
 	}
 	
-	public HashMap<Guest, ArrayList<Room>> getReservations(){
-		return hotel;
-	}
-
 }

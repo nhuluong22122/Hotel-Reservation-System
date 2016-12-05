@@ -48,5 +48,4 @@ public class Guest implements Comparable<Guest>, Serializable{
 	public int compareTo(Guest g) {
 		return username.compareTo(g.getUsername());
 	}
-	
 }
