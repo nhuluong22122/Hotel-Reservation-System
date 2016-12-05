@@ -7,8 +7,17 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
+/**
+ * The Sign Up Panel that allows users to sign up for an account with their user name
+ * @author nhuluong
+ *
+ */
 public class SignUpPanel extends JPanel {
+	/**
+	 * Construct a panel with JTextField to enter user name and a button that generate an automated ID
+	 * @param hotel the hotel model to switch frames
+	 * @param guestData the guest model to store data and create a new user
+	 */
 	public SignUpPanel(HotelModel hotel, GuestModel guestData) {
 		setLayout(null);
 
@@ -35,6 +44,7 @@ public class SignUpPanel extends JPanel {
 				String username = usernameinput.getText();
 				Guest g = guestData.signUp(username);
 				guestData.signIn(g.getUserID());
+				guestData.getReservations().resetTransaction();
 				hotel.update(new ReservationOptions(hotel, guestData, g));
 
 			}

@@ -1,3 +1,5 @@
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,7 +18,7 @@ public class GuestModel{
 		re = r;
 		//create new reservations
 		listeners = new ArrayList<ChangeListener>();
-
+		
 	}
 
 	/**
@@ -67,6 +69,10 @@ public class GuestModel{
 	public void cancelReservation(Room r) throws Exception {
 		//call method
 		re.cancelReservation(r);
+		ChangeEvent event = new ChangeEvent(this);
+		for (ChangeListener c : listeners) {
+			c.stateChanged(event);
+		}
 	}
 
 	/**

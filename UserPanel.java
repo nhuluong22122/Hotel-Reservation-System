@@ -6,8 +6,17 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-
+/**
+ * The Panel that asks user to sign up or sign in
+ * @author nhuluong
+ *
+ */
 public class UserPanel extends JPanel{
+	/**
+	 * Construct a new panel with 2 buttons 
+	 * @param hotel the hotel model to switch frames
+	 * @param guestData the guest model to store datas
+	 */
 	public UserPanel(HotelModel hotel, GuestModel guestData){
 		setLayout(null);
 		//Create two buttons

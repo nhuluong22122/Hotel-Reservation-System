@@ -93,7 +93,7 @@ public class ReservationPanel extends JPanel implements Serializable{
 		doneButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Receipt window *** todo
-				hotel.update(new ReceiptPanel(guestModel.getReservations(), hotel));
+				hotel.update(new ReceiptOptions(guestModel.getReservations(), hotel, guestModel));
 			}
 		});
 		loopButton.addActionListener(new ActionListener() {

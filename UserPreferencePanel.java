@@ -3,6 +3,10 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.Date;
 
 import javax.swing.JButton;
@@ -101,5 +105,6 @@ public class UserPreferencePanel extends JPanel{
 		add(luxuryRoomButton);
 		add(econRoomButton);
 	}
+
 	
 }

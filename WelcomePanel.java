@@ -1,3 +1,4 @@
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -14,16 +15,25 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
+/**
+ * The first screen of the reservation system that allows user to select to proceed as a guest or a manager
+ * @author DuocNguyen
+ *
+ */
 public class WelcomePanel extends JPanel{
 
 	private final String FILE_NAME = "reservations.txt";
-	
+	/**
+	 * Constructor that loads the data whenever the program starts and display 2 buttons
+	 * @param hotel the hotel model being used to switch frame
+	 */
 	public WelcomePanel(HotelModel hotel) {
 		setLayout(null);
 
 		JButton managerButton = new JButton("Manager");
-		managerButton.setBounds(500, 200, 100, 50);
+		managerButton.setBounds(400, 175, 200, 100);
+		managerButton.setFont(new Font("Arial", Font.PLAIN, 15));
+		
 		managerButton.addActionListener(new 
 				ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -32,18 +42,16 @@ public class WelcomePanel extends JPanel{
 		});
 
 		JButton guestButton = new JButton("Guest");
-		guestButton.setBounds(100,200,100,50);
+		guestButton.setFont(new Font("Arial", Font.PLAIN, 15));
+		guestButton.setBounds(100,175,200,100);
 		guestButton.addActionListener( new 
 				ActionListener() {
 
 					public void actionPerformed(ActionEvent e) {
 						Reservations r = deserialize();
 						GuestModel guestModel = new GuestModel(r);
-						
 						hotel.update(new UserPanel(hotel, guestModel));
-						
 					}
-				
 		});
 
 		add(managerButton);
