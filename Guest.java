@@ -8,6 +8,7 @@ public class Guest implements Comparable<Guest>, Serializable{
 	private Date startDate;
 	private Date endDate;
 
+    //testing purposes.
 	public Guest(int ID, String user) {
 		userID = ID;
 		username = user;
