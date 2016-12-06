@@ -8,6 +8,12 @@ import java.util.HashMap;
 
 import javax.swing.JOptionPane;
 
+/**
+ * Models a class to save all guest reservations.
+ * @author DuocNguyen
+ * @author MichelleSong
+ *
+ */
 public class Reservations implements Serializable {
 	private HashMap<Guest, ArrayList<Room>> hotel;
 	private ArrayList<Room> availableRooms;
@@ -15,13 +21,6 @@ public class Reservations implements Serializable {
 	private int currentID;
 	private Guest currentGuest;
 	private ArrayList<Room> thisTransaction;
-
-	public class RoomComparator implements Comparator<Room>{
-		@Override
-		public int compare(Room o1, Room o2) {
-			return o1.getStartDate().compareTo(o2.getStartDate());
-		}
-	}
 
 
 	public Reservations() {
@@ -43,7 +42,11 @@ public class Reservations implements Serializable {
 			availableRooms.add(r);
 		}
 	}
-
+	
+	/**
+	 * Gets the number of reservations.
+	 * @return Number of reservations.
+	 */
 	public int getSize() {
 		return hotel.size();
 	}
@@ -270,22 +273,42 @@ public class Reservations implements Serializable {
 		availableRooms = newAvailability;
 	}
 
+	/**
+	 * Gets the current guest
+	 * @return	Current guest.
+	 */
 	public Guest getCurrentGuest() {
 		return currentGuest;
 	}
 
+	/**
+	 * Gets hotel reservations data.
+	 * @return	Hotel data.
+	 */
 	public HashMap<Guest, ArrayList<Room>> getData() {
 		return hotel;
 	}
 
+	/**
+	 * 
+	 */
 	public void resetTransaction() {
 		thisTransaction = new ArrayList<Room>();
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public ArrayList<Room> getCurrentTransaction() {
 		return thisTransaction;
 	}
 
+	/**
+	 * 
+	 * @param receiptType
+	 * @return
+	 */
 	public String formatReceipt(Receipt receiptType) {
 		String display = "";
 		display += "User ID: " + receiptType.showUserID() + "\n";
@@ -295,6 +318,22 @@ public class Reservations implements Serializable {
 		return display;
 	}
 	
+	/**
+	 * 
+	 * @author 
+	 *
+	 */
+	public class RoomComparator implements Comparator<Room>{
+		@Override
+		public int compare(Room o1, Room o2) {
+			return o1.getStartDate().compareTo(o2.getStartDate());
+		}
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
 	public RoomComparator getComparator(){
 		return new RoomComparator();
 	}

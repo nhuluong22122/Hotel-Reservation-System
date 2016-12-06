@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Point;
@@ -28,6 +29,7 @@ enum DAYS
 
 /**
  * Models a calendar month view.
+ * This class was adopted from Duoc's Simple GUI Calendar Project with modifications. 
  * @author DuocNguyen
  * @version 1.0
  */

@@ -5,6 +5,7 @@ import javax.swing.event.ChangeListener;
 
 /**
  * Models a data model class for MVC pattern.
+ * This class was adopted from Duoc's Simple GUI Calendar project.
  * @author DuocNguyen
  * @version 1.0
  */

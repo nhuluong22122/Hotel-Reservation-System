@@ -1,5 +1,4 @@
 import java.io.Serializable;
-import java.util.Comparator;
 import java.util.Date;
 
 public class Room implements Serializable{
@@ -8,6 +7,7 @@ public class Room implements Serializable{
 	private int roomNumber;
 	private Date startDate;
 	private Date endDate;
+	private Guest guest;
 	
 	public boolean getCurrentStatus(){
 		return isCurrent;
@@ -47,6 +47,14 @@ public class Room implements Serializable{
 	
 	public void setEndDate(Date eDate) {
 		endDate = eDate;
+	}
+	
+	public void setGuest(Guest g){
+		guest = g;
+	}
+	
+	public Guest getGuest(){
+		return guest;
 	}
 	
 	public boolean isClash(Date start, Date end) {

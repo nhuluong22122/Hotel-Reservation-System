@@ -20,6 +20,7 @@ import javax.swing.event.ChangeListener;
  * Reciept Panel that displays the reciept based on users' preference
  * 
  * @author nhuluong
+ * @author DuocNguyen
  *
  */
 public class ReceiptPanel extends JPanel {
@@ -55,7 +56,9 @@ public class ReceiptPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				serialize();
-				hm.update(new UserPanel(hm, rm));
+				//hm.update(new UserPanel(hm, rm));
+				hotel.update(new WelcomePanel(hotel));
+				//System.exit(0);
 			}
 		});
 		// Where the receipt will be displayed

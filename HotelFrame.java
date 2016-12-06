@@ -6,12 +6,21 @@ import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+/**
+ * Models a JFrame class for hotel.
+ * @author DuocNguyen
+ *
+ */
 public class HotelFrame extends JFrame implements ChangeListener{
 	private HotelModel components;
 	private JPanel contentPanel;
 	private final int FRAME_WIDTH = 700;
 	private final int FRAME_HEIGHT =500;
 	
+	/**
+	 * Constructs a hotel frame.
+	 * @param model
+	 */
 	public HotelFrame(HotelModel model){			 
 		contentPanel = new JPanel();
 		contentPanel.setLayout(new BorderLayout());

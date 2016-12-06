@@ -3,6 +3,13 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 
+/**
+ * Hotel Reservation System Project.
+ * @author DuocNguyen
+ * @author NhuLuong
+ * @author MichelleSong
+ * @version 1.0
+ */
 public class HotelReservationSystem {
 	
 	public static void main(String[] args) {
