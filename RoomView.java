@@ -26,6 +26,11 @@ import javax.swing.border.LineBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+/**
+ * Model a room view Panel.
+ * @author DuocNguyen
+ *
+ */
 public class RoomView extends JPanel{
 	private JPanel rv;
 	private JTextArea infoArea;
@@ -35,6 +40,10 @@ public class RoomView extends JPanel{
 	private String currentRoomInfo;
 	private ArrayList<JLabel> rLabels; 
 	
+	/**
+	 * Constructs a room view panel.
+	 * @param hm
+	 */
 	public RoomView(HotelModel hm){
 		save = "";
 		rmodel = new RoomDataModel();
@@ -141,8 +150,8 @@ public class RoomView extends JPanel{
 		JPanel selectedRoomInfo = new JPanel();
 		selectedRoomInfo.setLayout(new BorderLayout());
 		selectedRoomInfo.setBorder(LineBorder.createGrayLineBorder());
-		JLabel header = new JLabel();
-		header.setText("ROOM INFORMATION");
+		JLabel header = new JLabel("Room Information", SwingConstants.CENTER);
+		
 
 		JPanel roomInfo = new JPanel();
 		roomInfo.setBorder(LineBorder.createGrayLineBorder());
@@ -162,6 +171,11 @@ public class RoomView extends JPanel{
 		add(rv);
 	}
 
+	/**
+	 * Gets the reserved room information. 
+	 * @param roomNum	The selected room number.
+	 * @return	A string of information.
+	 */
 	public String getRoomInfo(int roomNum){
 		if(roomNum == 0){	//reset
 			return "";
@@ -173,17 +187,25 @@ public class RoomView extends JPanel{
 				currentRoomInfo += "Name: " + g.getUsername();
 				currentRoomInfo += "\nUser ID: " + g.getUserID();
 				currentRoomInfo += "\nReserved Room " + r.getRoomNumber() + ": " + r.getRoomType();
-				currentRoomInfo += "\nStart Date: " + ViewPanel.formatDate(r.getStartDate());
-				currentRoomInfo += "\nEnd Date: " + ViewPanel.formatDate(r.getEndDate()) + "\n\n";
+				currentRoomInfo += "\nStart Date: " + ReservationPanel.formatDate(r.getStartDate());
+				currentRoomInfo += "\nEnd Date: " + ReservationPanel.formatDate(r.getEndDate()) + "\n\n";
 			}
 		}
 		return currentRoomInfo;
 	}
 
+	/**
+	 * Sets the list of rooms to a list of guest reserved rooms.
+	 * @param r List of guest reserved rooms on the selected day.
+	 */
 	public void setReservedRooms(ArrayList<Room> r){
 		resRoom = r;
 	}
 	
+	/**
+	 * Reset the room view to no selected room.
+	 * @postcondition: no room number is highlighted in room view.
+	 */
 	public void reset(){
 		rmodel.update(0);
 	}

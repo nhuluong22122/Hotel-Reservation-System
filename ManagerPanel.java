@@ -53,7 +53,7 @@ public class ManagerPanel extends JPanel{
 			public void actionPerformed(ActionEvent e) {
 				GregorianCalendar data = new GregorianCalendar();			//selects the current day for views.
 				CalendarDataModel model = new CalendarDataModel(data);		//creates a data model for calendar view
-				hotel.update(new ViewPanel(model, reservationsCalendar, hotel));
+				hotel.update(new ManagerViewPanel(model, reservationsCalendar, hotel));
 			}
 
 		});

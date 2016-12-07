@@ -9,7 +9,8 @@ import java.util.HashMap;
 import java.util.TreeMap;
 
 /**
- * 
+ * A calendar of guest reserved room.
+ * This class is for Manager functions uses.
  * @author DuocNguyen
  *
  */
@@ -19,6 +20,10 @@ public class ReservationsCalendar{
 	private Reservations res;
 	private final String FILE_NAME = "reservations.txt";
 
+	
+	/**
+	 * Constructs a calendar of reservations.
+	 */
 	public ReservationsCalendar() {
 		reservationsMap = new TreeMap<Date, ArrayList<Room>>();
 		res = deserialize();
@@ -72,8 +77,8 @@ public class ReservationsCalendar{
 	}
 	
 	/**
-	 * Insert guest into tree map.
-	 * @param g
+	 * Insert room into tree map of guest room reservations.
+	 * @param r the room.
 	 */
 	public void insert(Room r){
 		Date startDate = r.getStartDate();
@@ -94,6 +99,10 @@ public class ReservationsCalendar{
 	}
 	
 	
+	/**
+	 * Gets the reservations map.
+	 * @return	Reservations map.
+	 */
 	public TreeMap<Date, ArrayList<Room>> getReservationsMap(){
 		return reservationsMap;
 	}

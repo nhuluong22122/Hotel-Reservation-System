@@ -171,7 +171,7 @@ public class ReservationPanel extends JPanel implements Serializable{
 	 * Example: Date date of event becomes 10/02/2016 (mm/dd/yy)
 	 * @return a String in MM/DD/YY format
 	 */
-	public String formatDate(Date d) {
+	public static String formatDate(Date d) {
 		int month = d.getMonth() + 1;
 		int dayOfMonth = d.getDate();
 		int year = d.getYear() + 1900;
