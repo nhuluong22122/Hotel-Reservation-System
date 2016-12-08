@@ -4,7 +4,7 @@ import java.util.Collections;
 /**
  * The Comprehensive receipt that displays every valid reservations the current
  * user created.
- * 
+ *
  * @author nhuluong
  *
  */
@@ -14,7 +14,7 @@ public class ComprehensiveReceipt implements Receipt {
 
 	/**
 	 * Constructor
-	 * 
+	 *
 	 * @param r2
 	 *            the current room data
 	 */
@@ -25,7 +25,7 @@ public class ComprehensiveReceipt implements Receipt {
 
 	/**
 	 * Display the user ID based on the current guest
-	 * 
+	 *
 	 * @return the current user ID
 	 */
 	public String showUserID() {
@@ -34,7 +34,7 @@ public class ComprehensiveReceipt implements Receipt {
 
 	/**
 	 * Display the user name based on the current guest
-	 * 
+	 *
 	 * @return the current user name
 	 */
 	public String showUserName() {
@@ -44,7 +44,7 @@ public class ComprehensiveReceipt implements Receipt {
 	/**
 	 * Display all the reserved rooms made by the user & his or her old valid
 	 * data
-	 * 
+	 *
 	 * @return a formatted paragraph that contains all the information about the
 	 *         user' reserved rooms
 	 */
@@ -54,6 +54,7 @@ public class ComprehensiveReceipt implements Receipt {
 		String previousDate = "";
 		String currentType = "";
 		String previousType = "";
+		int numType = 0;
 		boolean first = true;
 		if (r.getData().containsKey(g)) {
 			ArrayList<Room> current = r.getData().get(g);
@@ -65,6 +66,7 @@ public class ComprehensiveReceipt implements Receipt {
 						+ String.valueOf(r.getStartDate().getYear()).substring(1) + " - " + String.valueOf(eMonth) + "/"
 						+ r.getEndDate().getDate() + "/" + String.valueOf(r.getStartDate().getYear()).substring(1);
 				if (!currentDate.equals(previousDate)) {
+					numType = 0;
 					if (first) {
 						allRooms += "Date:" + currentDate + "\n";
 						first = false;
@@ -76,7 +78,12 @@ public class ComprehensiveReceipt implements Receipt {
 				previousDate = currentDate;
 				currentType = r.getRoomType();
 				if (!currentType.equals(previousType)) {
-					allRooms += "Room Type: " + r.getRoomType() + "\n";
+					numType++;
+					if (numType == 2) {
+						allRooms += "\nRoom Type: " + r.getRoomType() + "\n";
+					} else {
+						allRooms += "Room Type: " + r.getRoomType() + "\n";
+					}
 					allRooms += "Room Number: " + r.getRoomNumber();
 				} else {
 					allRooms += ", " + r.getRoomNumber();
@@ -91,7 +98,7 @@ public class ComprehensiveReceipt implements Receipt {
 
 	/**
 	 * Display the amount due based on all their valid reserved rooms
-	 * 
+	 *
 	 * @return the total amount due from all their valid reservations
 	 */
 	public String showAmountDue() {
@@ -99,11 +106,7 @@ public class ComprehensiveReceipt implements Receipt {
 		if (r.getData().containsKey(g)) {
 			ArrayList<Room> current = r.getData().get(g);
 			for (Room r : current) {
-				if (r.getRoomType().equalsIgnoreCase("luxury")) {
-					totalPrice += 200;
-				} else {
-					totalPrice += 80;
-				}
+				totalPrice += r.getPrice();
 
 			}
 		}

@@ -3,7 +3,7 @@ import java.util.ArrayList;
 /**
  * The Comprehensive receipt that displays only reservations being made the
  * current transaction
- * 
+ *
  * @author nhuluong
  *
  */
@@ -44,6 +44,8 @@ public class SimpleReceipt implements Receipt {
 		String previousDate = "";
 		String currentType = "";
 		String previousType = "";
+		boolean first = true;
+		int numType = 0;
 		if (r.getData().containsKey(g)) {
 			ArrayList<Room> current = r.getCurrentTransaction();
 			for (Room r : current) {
@@ -51,21 +53,32 @@ public class SimpleReceipt implements Receipt {
 				int eMonth = Integer.parseInt(String.valueOf(r.getStartDate().getMonth())) + 1;
 				currentDate = String.valueOf(sMonth) + "/" + r.getStartDate().getDate() + "/"
 						+ String.valueOf(r.getStartDate().getYear()).substring(1) + " - " + String.valueOf(eMonth) + "/"
-						+ r.getEndDate().getDate() + "/" + String.valueOf(r.getStartDate().getYear()).substring(1)
-						+ "\n";
+						+ r.getEndDate().getDate() + "/" + String.valueOf(r.getStartDate().getYear()).substring(1);
 				if (!currentDate.equals(previousDate)) {
-					allRooms += "\nDate:" + currentDate;
+					numType = 0;
+					if (first) {
+						allRooms += "Date:" + currentDate + "\n";
+						first = false;
+					} else {
+						allRooms += "\n\nDate:" + currentDate + "\n";
+						previousType = "";
+					}
 				}
 				previousDate = currentDate;
 				currentType = r.getRoomType();
 				if (!currentType.equals(previousType)) {
-					allRooms += "Room Type: " + r.getRoomType() + "\n";
+					numType++;
+					System.out.println(numType);
+					if (numType == 1) {
+						allRooms += "Room Type: " + r.getRoomType() + "\n";
+					} else {
+						allRooms += "\nRoom Type: " + r.getRoomType() + "\n";
+					}
 					allRooms += "Room Number: " + r.getRoomNumber();
 				} else {
 					allRooms += ", " + r.getRoomNumber();
 				}
 				previousType = currentType;
-
 			}
 		}
 		return allRooms;
@@ -80,11 +93,7 @@ public class SimpleReceipt implements Receipt {
 		if (r.getData().containsKey(g)) {
 			ArrayList<Room> current = r.getCurrentTransaction();
 			for (Room r : current) {
-				if (r.getRoomType().equalsIgnoreCase("luxury")) {
-					totalPrice += 200;
-				} else {
-					totalPrice += 80;
-				}
+				totalPrice += r.getPrice();
 
 			}
 		}

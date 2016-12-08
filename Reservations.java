@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
  * Models a class to save all guest reservations.
  * @author DuocNguyen
  * @author MichelleSong
+ * @author NhuLuong
  *
  */
 public class Reservations implements Serializable {
@@ -42,7 +43,7 @@ public class Reservations implements Serializable {
 			availableRooms.add(r);
 		}
 	}
-	
+
 	/**
 	 * Gets the number of reservations.
 	 * @return Number of reservations.
@@ -53,7 +54,7 @@ public class Reservations implements Serializable {
 
 	/**
 	 * Returns a formatted string of current available rooms of a room type
-	 * 
+	 *
 	 * @param type
 	 *            the room type requested
 	 * @return s a string with data of current available rooms
@@ -117,12 +118,13 @@ public class Reservations implements Serializable {
 			throw new Exception(message);
 		}
 		hotel.get(currentGuest).remove(r);
+		availableRooms.add(r);
 	}
 
 	/**
 	 * Assigns a guest to a specified room number until guest cancels the
 	 * reservation
-	 * 
+	 *
 	 * @param roomNumber
 	 *            the number of the room
 	 * @precondition: user is signed in and room number exists in the system
@@ -161,7 +163,7 @@ public class Reservations implements Serializable {
 
 	/**
 	 * Assigns a guest to a room until guest cancels the reservation
-	 * 
+	 *
 	 * @param checkIn
 	 *            the check-in date
 	 * @param checkOut
@@ -216,7 +218,7 @@ public class Reservations implements Serializable {
 	/**
 	 * Updates guest data and room availability after user logs in and selects
 	 * preferences
-	 * 
+	 *
 	 * @param s
 	 *            the start date
 	 * @param e
@@ -290,14 +292,14 @@ public class Reservations implements Serializable {
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	public void resetTransaction() {
 		thisTransaction = new ArrayList<Room>();
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	public ArrayList<Room> getCurrentTransaction() {
@@ -305,7 +307,7 @@ public class Reservations implements Serializable {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param receiptType
 	 * @return
 	 */
@@ -313,14 +315,14 @@ public class Reservations implements Serializable {
 		String display = "";
 		display += "User ID: " + receiptType.showUserID() + "\n";
 		display += "Username: " + receiptType.showUserName() + "\n";
-		display += "Reserved Rooms: " + receiptType.showReservedRooms() + "\n";
+		display += "Reserved Rooms: \n" + receiptType.showReservedRooms() + "\n";
 		display += "Total Amount Due: $" + receiptType.showAmountDue();
 		return display;
 	}
-	
+
 	/**
-	 * 
-	 * @author 
+	 *
+	 * @author
 	 *
 	 */
 	public class RoomComparator implements Comparator<Room>{
@@ -329,9 +331,9 @@ public class Reservations implements Serializable {
 			return o1.getStartDate().compareTo(o2.getStartDate());
 		}
 	}
-	
+
 	/**
-	 * 
+	 *
 	 * @return
 	 */
 	public RoomComparator getComparator(){

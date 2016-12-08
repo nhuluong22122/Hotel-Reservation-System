@@ -19,7 +19,7 @@ import javax.swing.event.ChangeListener;
 
 /**
  * The panel that allows user to view and cancel their reservations
- * 
+ *
  * @author nhuluong
  *
  */
@@ -27,7 +27,7 @@ public class ViewCancelView extends JPanel {
 	/**
 	 * Constructor that contains a text area and JComponents to remove a room
 	 * and exit
-	 * 
+	 *
 	 * @param hm
 	 *            the hotel model
 	 * @param gm
@@ -42,10 +42,10 @@ public class ViewCancelView extends JPanel {
 		final JTextArea textArea = new JTextArea(300, 400);
 		textArea.setEditable(false);
 		textArea.setFont(new Font("Arial", Font.PLAIN, 13));
-		
+
 		JScrollPane scroll = new JScrollPane(textArea, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		scroll.setBounds(150, 50, 400, 250);
-		
+
 		ComprehensiveReceipt c = new ComprehensiveReceipt(gm.getReservations());
 		textArea.setText(c.showReservedRooms());
 
@@ -78,18 +78,6 @@ public class ViewCancelView extends JPanel {
 		selection.setBounds(300, 325, 200, 50);
 		selection.setFont(new Font("Arial", Font.PLAIN, 15));
 
-		// Update the combo box
-		ChangeListener selectionUpdate = new ChangeListener() {
-
-			@Override
-			public void stateChanged(ChangeEvent e) {
-				selection.removeItemAt(selection.getSelectedIndex());
-				selection.validate();
-				selection.repaint();
-			}
-		};
-		gm.addChangeListener(selectionUpdate);
-
 		// Remove button
 		JButton remove = new JButton("Remove room: ");
 		remove.setBounds(150, 325, 150, 50);
@@ -101,6 +89,9 @@ public class ViewCancelView extends JPanel {
 				try {
 					if (selection.getItemCount() > -1) {
 						gm.cancelReservation(list.get(selection.getSelectedIndex()));
+						selection.removeItemAt(selection.getSelectedIndex());
+						selection.validate();
+						selection.repaint();
 					}
 
 				} catch (Exception e1) {
