@@ -13,6 +13,7 @@ import javax.swing.event.ChangeListener;
 /**
  * ReservationPanel holds a view of the available rooms and JComponents used to modify the existing data in model (JButton)
  * Responsible for creating the look and feel of the room availability view
+ * @author Michelle Song
  *
  */
 public class ReservationPanel extends JPanel implements Serializable{

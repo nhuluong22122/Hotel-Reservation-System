@@ -15,6 +15,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+/**
+ * User preference panel displays form for user to input their preferences
+ * @author Michelle Song
+ *
+ */
 public class UserPreferencePanel extends JPanel{
 	private Date checkIn;
 	private Date checkOut;
