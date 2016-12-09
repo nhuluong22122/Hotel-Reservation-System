@@ -1,9 +1,5 @@
-import java.io.FileInputStream;
-import java.io.ObjectInputStream;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 
 import javax.swing.JOptionPane;
 import javax.swing.event.ChangeEvent;
@@ -134,6 +130,9 @@ public class GuestModel{
 		re.updateData(s, e);
 	}
 
+	/**
+	 * Notify all listeners
+	 */
 	public void update(){
 		ChangeEvent event = new ChangeEvent(this);
 		for (ChangeListener c : listeners) {
@@ -141,7 +140,10 @@ public class GuestModel{
 		}
 	}
 
-
+	/**
+	 * Gets all Reservations.
+	 * @return	Reservations.
+	 */
 	public Reservations getReservations(){
 		return re;
 	}

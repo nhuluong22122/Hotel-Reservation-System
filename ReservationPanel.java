@@ -3,9 +3,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-import java.io.Serializable;
 import java.util.Date;
-
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -16,7 +14,7 @@ import javax.swing.event.ChangeListener;
  * @author Michelle Song
  *
  */
-public class ReservationPanel extends JPanel implements Serializable{
+public class ReservationPanel extends JPanel{
 	private Date startDate;
 	private Date endDate;
 	private JLabel availabilityLabel;
@@ -188,9 +186,11 @@ public class ReservationPanel extends JPanel implements Serializable{
 		return m + "/" + dom + "/" + y.substring(2);
 	}
 	
+	/**
+	 * Update Guest Model
+	 * @param gm new guest model.
+	 */
 	public void updateData(GuestModel gm){
 		guestModel = gm;
-		
-		
 	}
 }

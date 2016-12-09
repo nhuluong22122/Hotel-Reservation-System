@@ -1,5 +1,3 @@
-import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
@@ -198,6 +196,11 @@ public class CalendarView extends JPanel{
         };
     }
     
+    /**
+     * Changes the view to the selected month.
+     * @param c The combo box.
+     * @return An action listener for the drop box.
+     */
     private ActionListener getMonthsNavigateListener(JComboBox<MONTHS> c){
         return new 
         ActionListener(){

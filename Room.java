@@ -159,7 +159,7 @@ public class Room implements Serializable {
 	 * @return the price of the room based on the	 number of reserved days
 	 */
 	public int getPrice() {
-		int difference = endDate.getDate() - startDate.getDate();
+		int difference = endDate.getDate() - startDate.getDate() + 1;
 		if (roomType.contains("Luxury")) {
 			return difference * 200;
 		} else {

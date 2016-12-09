@@ -5,7 +5,6 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 /**
  * The Panel that allows user to select Simple or Comprehensive receipt  
  * @author nhuluong

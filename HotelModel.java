@@ -1,6 +1,4 @@
 import java.util.ArrayList;
-import java.util.List;
-
 import javax.swing.JPanel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;

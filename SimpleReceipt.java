@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * The Comprehensive receipt that displays only reservations being made the
@@ -48,6 +49,7 @@ public class SimpleReceipt implements Receipt {
 		int numType = 0;
 		if (r.getData().containsKey(g)) {
 			ArrayList<Room> current = r.getCurrentTransaction();
+			Collections.sort(current, r.getComparator());
 			for (Room r : current) {
 				int sMonth = Integer.parseInt(String.valueOf(r.getStartDate().getMonth())) + 1;
 				int eMonth = Integer.parseInt(String.valueOf(r.getStartDate().getMonth())) + 1;

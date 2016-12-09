@@ -6,6 +6,7 @@
  *
  */
 public interface Receipt {
+	
 	String showUserID();
 
 	String showUserName();

@@ -1,9 +1,7 @@
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.HashMap;
 
 import javax.swing.JOptionPane;
@@ -292,24 +290,24 @@ public class Reservations implements Serializable {
 	}
 
 	/**
-	 *
+	 * Clear every element in the ArrayList when starting a new transaction
 	 */
 	public void resetTransaction() {
 		thisTransaction = new ArrayList<Room>();
 	}
 
 	/**
-	 *
-	 * @return
+	 *Return the reversed room within this transaction
+	 * @return the list of reserved rooms of a guest in this transaction
 	 */
 	public ArrayList<Room> getCurrentTransaction() {
 		return thisTransaction;
 	}
 
 	/**
-	 *
-	 * @param receiptType
-	 * @return
+	 * The Strategy pattern method that format the receipt based on the receipt type
+	 * @param receiptType the type of the receipt 
+	 * @return the formatted string that contains all the information of the user based on the receipt type
 	 */
 	public String formatReceipt(Receipt receiptType) {
 		String display = "";
@@ -321,8 +319,8 @@ public class Reservations implements Serializable {
 	}
 
 	/**
-	 *
-	 * @author
+	 * The Comparator class that arrange Room in a list based on its start date
+	 * @author NhuLuong
 	 *
 	 */
 	public class RoomComparator implements Comparator<Room>{
@@ -333,8 +331,8 @@ public class Reservations implements Serializable {
 	}
 
 	/**
-	 *
-	 * @return
+	 * Return the RoomComparator based on start date
+	 * @return room comparator based on start date
 	 */
 	public RoomComparator getComparator(){
 		return new RoomComparator();
